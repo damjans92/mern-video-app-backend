@@ -15,8 +15,7 @@ app.use(
   cors({
     credentials: true,
     methods: '*',
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    origin: 'https://mern-video-app-frontend.vercel.app',
+    origin: 'http://localhost:5173',
   })
 )
 
@@ -38,7 +37,9 @@ const connectDB = () => {
       throw err
     })
 }
-
+app.use('/', (req, res) => {
+  res.send('Server started')
+})
 // routes
 app.use('/api/auth', authRoutes)
 app.use('/api/users', userRoutes)
