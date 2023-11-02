@@ -14,7 +14,8 @@ app.use(cookieParser())
 app.use(
   cors({
     credentials: true,
-    origin: 'http://localhost:5173',
+    methods: '*',
+    origin: 'https://mern-video-app-frontend.vercel.app',
   })
 )
 
