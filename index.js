@@ -15,7 +15,7 @@ app.use(
   cors({
     credentials: true,
     methods: '*',
-    origin: 'http://localhost:5173',
+    origin: 'https://mern-video-app-frontend.vercel.app',
   })
 )
 
