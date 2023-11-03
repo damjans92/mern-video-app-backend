@@ -15,7 +15,10 @@ app.use(
   cors({
     credentials: true,
     methods: '*',
-    origin: 'https://mern-video-app-frontend.vercel.app',
+    origin: [
+      'https://mern-video-app-frontend.vercel.app',
+      'https://tubeland.onrender.com',
+    ],
   })
 )
 
