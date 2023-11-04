@@ -63,13 +63,13 @@ export const signin = async (req, res, next) => {
     // Set the access token as an HTTP-only cookie
     res.cookie('access_token', accessToken, {
       httpOnly: true,
-      sameSite: 'strict',
+      sameSite: 'none',
     })
 
     // Set the refresh token as an HTTP-only cookie
     res.cookie('refresh_token', refreshToken, {
       httpOnly: true,
-      sameSite: 'strict',
+      sameSite: 'none',
     })
 
     res.status(200).json(others)
