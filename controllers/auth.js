@@ -64,12 +64,14 @@ export const signin = async (req, res, next) => {
     res.cookie('access_token', accessToken, {
       httpOnly: true,
       sameSite: 'none',
+      secure: true,
     })
 
     // Set the refresh token as an HTTP-only cookie
     res.cookie('refresh_token', refreshToken, {
       httpOnly: true,
       sameSite: 'none',
+      secure: true,
     })
 
     res.status(200).json(others)

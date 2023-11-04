@@ -23,6 +23,8 @@ export const verifyToken = (req, res, next) => {
           const newAccessToken = jwt.sign({ id: user._id }, process.env.JWT)
           res.cookie('access_token', newAccessToken, {
             httpOnly: true,
+            sameSite: 'none',
+            secure: true,
             // Other cookie options
           })
 
