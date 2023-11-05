@@ -14,8 +14,9 @@ app.use(cookieParser())
 app.use(
   cors({
     credentials: true,
-    methods: '*',
     origin: 'https://tubeland.onrender.com',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    allowedHeaders: 'Content-Type',
   })
 )
 
