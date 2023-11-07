@@ -61,7 +61,6 @@ export const signin = async (req, res, next) => {
     // Set the access token as an HTTP-only cookie
     res.cookie('access_token', accessToken, {
       httpOnly: true,
-      sameSite: 'none',
       secure: true,
       maxAge: 10 * 60 * 1000,
     })
@@ -69,7 +68,6 @@ export const signin = async (req, res, next) => {
     // Set the refresh token as an HTTP-only cookie
     res.cookie('refresh_token', refreshToken, {
       httpOnly: true,
-      sameSite: 'none',
       secure: true,
       maxAge: 7 * 24 * 60 * 60 * 1000,
     })
