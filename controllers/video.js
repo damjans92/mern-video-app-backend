@@ -94,9 +94,8 @@ export const addView = async (req, res, next) => {
   }
 }
 
-// Get a list of random videos
-export const random = async (req, res, next) => {
-  console.log('random')
+// Get a list of sorted videos
+export const sorted = async (req, res, next) => {
   const skip = req.query.skip ? Number(req.query.skip) : 0
   const limit = req.query.limit ? Number(req.query.limit) : 10
   try {
@@ -114,7 +113,6 @@ export const random = async (req, res, next) => {
 
 // Get a list of trending videos
 export const trend = async (req, res, next) => {
-  console.log('trend')
   const skip = req.query.skip ? Number(req.query.skip) : 0
   const limit = req.query.limit ? Number(req.query.limit) : 10
   try {
@@ -132,12 +130,15 @@ export const trend = async (req, res, next) => {
 
 // Get video list of subscriptions
 export const sub = async (req, res, next) => {
-  console.log('sub')
   const skip = req.query.skip ? Number(req.query.skip) : 0
   const limit = req.query.limit ? Number(req.query.limit) : 10
   try {
     const user = await User.findById(req.user.id)
     const subscribedChannels = user.subscribedUsers
+
+    if (subscribedChannels.length === 0) {
+      return res.status(200).json([])
+    }
 
     const list = await Promise.all(
       subscribedChannels.map(async (channelId) => {

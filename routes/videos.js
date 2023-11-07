@@ -8,7 +8,7 @@ import {
   getOtherUserVideos,
   getUserVideos,
   getVideo,
-  random,
+  sorted,
   search,
   sub,
   trend,
@@ -42,10 +42,10 @@ router.put('/view/:id', addView)
 //get trending videos
 router.get('/trend', trend)
 
-//get random videos
-router.get('/random', random)
+//get sorted videos
+router.get('/sorted', sorted)
 
-//subscribe to a user/channel
+//get subscribed videos
 router.get('/sub', verifyToken, sub)
 
 //get videos by tag
