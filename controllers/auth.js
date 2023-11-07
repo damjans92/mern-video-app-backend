@@ -118,6 +118,7 @@ export const logout = async (req, res, next) => {
   try {
     res
       .clearCookie('access_token', { httpOnly: true })
+      .clearCookie('refresh_token', { httpOnly: true })
       .status(200)
       .send('Cookie cleared')
   } catch (error) {
