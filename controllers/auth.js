@@ -49,7 +49,7 @@ export const signin = async (req, res, next) => {
     if (!isCorrect) return next(createError(404, 'Wrong credentials'))
 
     const accessToken = jwt.sign({ id: user._id }, process.env.JWT, {
-      expiresIn: '1h',
+      expiresIn: '10m',
     })
 
     const refreshToken = jwt.sign({ id: user._id }, process.env.JWT, {
@@ -63,6 +63,7 @@ export const signin = async (req, res, next) => {
       httpOnly: true,
       sameSite: 'none',
       secure: true,
+      maxAge: 10 * 60 * 1000,
     })
 
     // Set the refresh token as an HTTP-only cookie
@@ -70,6 +71,7 @@ export const signin = async (req, res, next) => {
       httpOnly: true,
       sameSite: 'none',
       secure: true,
+      maxAge: 7 * 24 * 60 * 60 * 1000,
     })
 
     res.status(200).json(others)
