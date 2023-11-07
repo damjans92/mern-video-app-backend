@@ -61,14 +61,14 @@ export const signin = async (req, res, next) => {
     // Set the access token as an HTTP-only cookie
     res.cookie('access_token', accessToken, {
       httpOnly: true,
-      secure: true,
+      origin: 'https://tubeland.onrender.com',
       maxAge: 10 * 60 * 1000,
     })
 
     // Set the refresh token as an HTTP-only cookie
     res.cookie('refresh_token', refreshToken, {
       httpOnly: true,
-      secure: true,
+      origin: 'https://tubeland.onrender.com',
       maxAge: 7 * 24 * 60 * 60 * 1000,
     })
 

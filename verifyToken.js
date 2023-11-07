@@ -26,7 +26,7 @@ export const verifyToken = (req, res, next) => {
 
           res.cookie('access_token', newAccessToken, {
             httpOnly: true,
-            secure: true,
+            origin: 'https://tubeland.onrender.com',
             maxAge: 10 * 60 * 1000,
             // Other cookie options
           })
