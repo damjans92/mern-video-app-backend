@@ -61,16 +61,12 @@ export const signin = async (req, res, next) => {
     // Set the access token as an HTTP-only cookie
     res.cookie('access_token', accessToken, {
       httpOnly: true,
-      sameSite: 'none',
-      secure: true,
       maxAge: 10 * 60 * 1000,
     })
 
     // Set the refresh token as an HTTP-only cookie
     res.cookie('refresh_token', refreshToken, {
       httpOnly: true,
-      sameSite: 'none',
-      secure: true,
       maxAge: 7 * 24 * 60 * 60 * 1000,
     })
 
@@ -121,13 +117,9 @@ export const logout = async (req, res, next) => {
     res
       .clearCookie('access_token', {
         httpOnly: true,
-        sameSite: 'none',
-        secure: true,
       })
       .clearCookie('refresh_token', {
         httpOnly: true,
-        sameSite: 'none',
-        secure: true,
       })
       .status(200)
       .send('Cookie cleared')
