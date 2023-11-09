@@ -13,7 +13,7 @@ const app = express()
 app.use(cookieParser())
 app.use(
   cors({
-    credentials: true,
+    credentials: 'include',
     origin: 'https://tubeland.onrender.com',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept',
