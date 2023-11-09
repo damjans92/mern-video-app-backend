@@ -64,7 +64,6 @@ export const signin = async (req, res, next) => {
       sameSite: 'none',
       secure: true,
       maxAge: 10 * 60 * 1000,
-      domain: 'drab-plum-buffalo-ring.cyclic.app',
     })
 
     // Set the refresh token as an HTTP-only cookie
@@ -73,7 +72,6 @@ export const signin = async (req, res, next) => {
       sameSite: 'none',
       secure: true,
       maxAge: 7 * 24 * 60 * 60 * 1000,
-      domain: 'drab-plum-buffalo-ring.cyclic.app',
     })
 
     res.status(200).json(others)
@@ -125,13 +123,11 @@ export const logout = async (req, res, next) => {
         httpOnly: true,
         sameSite: 'none',
         secure: true,
-        domain: 'drab-plum-buffalo-ring.cyclic.app',
       })
       .clearCookie('refresh_token', {
         httpOnly: true,
         sameSite: 'none',
         secure: true,
-        domain: 'drab-plum-buffalo-ring.cyclic.app',
       })
       .status(200)
       .send('Cookie cleared')

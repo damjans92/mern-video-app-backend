@@ -25,7 +25,6 @@ export const verifyToken = (req, res, next) => {
           sameSite: 'none',
           secure: true,
           maxAge: 10 * 60 * 1000,
-          domain: 'drab-plum-buffalo-ring.cyclic.app',
           // Other cookie options
         })
 
