@@ -16,7 +16,7 @@ app.use(
     credentials: true,
     origin: 'https://tubeland.onrender.com',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    allowedHeaders: 'Content-Type',
+    allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept',
   })
 )
 
