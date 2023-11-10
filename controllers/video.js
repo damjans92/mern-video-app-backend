@@ -52,7 +52,16 @@ export const getUserVideos = async (req, res, next) => {
 
     res.status(200).json(videos)
   } catch (error) {
-    next(error)
+    // Handle errors appropriately
+    console.error('Error in getUserVideos:', error)
+
+    // Check if headers have already been sent
+    if (res.headersSent) {
+      return next(error) // Pass the error to the next middleware or error handler
+    }
+
+    // Send a response with an error status and message
+    res.status(500).json({ error: 'Internal Server Error' })
   }
 }
 
