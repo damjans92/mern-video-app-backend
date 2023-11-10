@@ -48,7 +48,7 @@ export const getVideo = async (req, res, next) => {
 export const getUserVideos = async (req, res, next) => {
   const id = req.user.id
   try {
-    const videos = await Video.find({ userId: { $in: id } })
+    const videos = await Video.find({ userId: id })
 
     res.status(200).json(videos)
   } catch (error) {
