@@ -144,6 +144,11 @@ export const sub = async (req, res, next) => {
   const limit = req.query.limit ? Number(req.query.limit) : 10
   try {
     const user = await User.findById(req.user.id)
+
+    if (!user || !user.subscribedUsers) {
+      return res.status(200).json([])
+    }
+
     const subscribedChannels = user.subscribedUsers
     console.log('SubCHANNELS: ' + subscribedChannels)
     if (subscribedChannels.length === 0) {
