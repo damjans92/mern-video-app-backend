@@ -22,15 +22,15 @@ export const verifyToken = (req, res, next) => {
 
         // Refresh token is valid. Issue a new access token.
         const newAccessToken = jwt.sign({ id: user._id }, process.env.JWT, {
-          expiresIn: '10m',
+          expiresIn: '5m',
         })
         console.log('New Access Token:', newAccessToken)
         res.cookie('access_token', newAccessToken, {
           httpOnly: true,
           sameSite: 'none',
           secure: true,
-          maxAge: 10 * 60 * 1000,
-          domain: '.cyclic.app',
+          maxAge: 5 * 60 * 1000,
+          domain: 'drab-plum-buffalo-ring.cyclic.app',
           // Other cookie options
         })
 

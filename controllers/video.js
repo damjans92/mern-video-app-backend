@@ -139,12 +139,13 @@ export const trend = async (req, res, next) => {
 
 // Get video list of subscriptions
 export const sub = async (req, res, next) => {
+  console.log('Handling /sub route')
   const skip = req.query.skip ? Number(req.query.skip) : 0
   const limit = req.query.limit ? Number(req.query.limit) : 10
   try {
     const user = await User.findById(req.user.id)
     const subscribedChannels = user.subscribedUsers
-
+    console.log('SubCHANNELS: ' + subscribedChannels)
     if (subscribedChannels.length === 0) {
       return res.status(200).json([])
     }
