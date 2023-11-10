@@ -24,7 +24,7 @@ export const verifyToken = (req, res, next) => {
         const newAccessToken = jwt.sign({ id: user._id }, process.env.JWT, {
           expiresIn: '10m',
         })
-
+        console.log('New Access Token:', newAccessToken)
         res.cookie('access_token', newAccessToken, {
           httpOnly: true,
           sameSite: 'none',
@@ -41,16 +41,17 @@ export const verifyToken = (req, res, next) => {
     } else {
       return next(createError(401, 'You are not authenticated'))
     }
+  } else {
+    // Add the else statement here
+    jwt.verify(accessToken, process.env.JWT, (err, user) => {
+      if (err) {
+        console.error('Error verifying access token:', err)
+        return next(createError(403, 'Access token is not valid.'))
+      }
+
+      // Access token is valid. Continue processing the request.
+      req.user = user
+      next()
+    })
   }
-
-  jwt.verify(accessToken, process.env.JWT, (err, user) => {
-    if (err) {
-      console.error('Error verifying access token:', err)
-      return next(createError(403, 'Access token is not valid.'))
-    }
-
-    // Access token is valid. Continue processing the request.
-    req.user = user
-    next()
-  })
 }
