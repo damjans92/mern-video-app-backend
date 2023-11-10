@@ -5,6 +5,9 @@ export const verifyToken = (req, res, next) => {
   const accessToken = req.cookies.access_token
   const refreshToken = req.cookies.refresh_token
 
+  console.log('Access Token:', accessToken)
+  console.log('Refresh Token:', refreshToken)
+
   if (!accessToken) {
     if (refreshToken) {
       // Attempt to refresh the access token using the refresh token
@@ -38,6 +41,7 @@ export const verifyToken = (req, res, next) => {
 
   jwt.verify(accessToken, process.env.JWT, (err, user) => {
     if (err) {
+      console.error('Error verifying access token:', err)
       return next(createError(403, 'Access token is not valid.'))
     }
 
