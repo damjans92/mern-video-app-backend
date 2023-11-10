@@ -12,7 +12,9 @@ export const verifyToken = (req, res, next) => {
     if (refreshToken) {
       // Attempt to refresh the access token using the refresh token
       jwt.verify(refreshToken, process.env.JWT, (err, user) => {
+        console.log('in verify refresh token')
         if (err) {
+          console.error('Error verifying refresh token:', err)
           return next(
             createError(403, 'Access and refresh tokens are not valid.')
           )
