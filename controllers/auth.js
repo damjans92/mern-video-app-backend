@@ -49,7 +49,7 @@ export const signin = async (req, res, next) => {
     if (!isCorrect) return next(createError(404, 'Wrong credentials'))
 
     const accessToken = jwt.sign({ id: user._id }, process.env.JWT, {
-      expiresIn: '5m',
+      expiresIn: '1m',
     })
 
     const refreshToken = jwt.sign({ id: user._id }, process.env.JWT, {
@@ -63,7 +63,7 @@ export const signin = async (req, res, next) => {
       httpOnly: true,
       sameSite: 'none',
       secure: true,
-      maxAge: 5 * 60 * 1000,
+      maxAge: 1 * 60 * 1000,
       domain: 'drab-plum-buffalo-ring.cyclic.app',
     })
 
