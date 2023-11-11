@@ -13,7 +13,6 @@ export const verifyToken = (req, res, next) => {
       // Attempt to refresh the access token using the refresh token
       jwt.verify(refreshToken, process.env.JWT, (err, user) => {
         console.log('in verify refresh token')
-        console.log('Refresh access token REQ.USER: ', req.user)
         console.log('Refresh access token USER: ', user)
         if (err) {
           console.error('Error verifying refresh token:', err)
@@ -39,6 +38,7 @@ export const verifyToken = (req, res, next) => {
 
         // Continue processing the request with the new access token.
         req.user = user
+        console.log('Refresh access token REQ.USER on end of code: ', req.user)
         return next()
       })
     } else {
@@ -47,7 +47,6 @@ export const verifyToken = (req, res, next) => {
   } else {
     // Add the else statement here
     jwt.verify(accessToken, process.env.JWT, (err, user) => {
-      console.log(' ACCESS TOKEN REQ.USER: ', req.user)
       console.log(' ACCESS TOKEN USER: ', user)
       if (err) {
         console.error('Error verifying access token:', err)
@@ -56,6 +55,7 @@ export const verifyToken = (req, res, next) => {
 
       // Access token is valid. Continue processing the request.
       req.user = user
+      console.log('Access token REQ.USER on end of code: ', req.user)
       next()
     })
   }
