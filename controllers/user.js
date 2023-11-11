@@ -4,6 +4,8 @@ import Video from '../models/Video.js'
 
 // Update user
 export const updateUser = async (req, res, next) => {
+  console.log('req.params.id', req.params.id)
+  console.log('req.user.id', req.user.id)
   if (req.params.id === req.user.id) {
     try {
       const updatedUser = await User.findByIdAndUpdate(
