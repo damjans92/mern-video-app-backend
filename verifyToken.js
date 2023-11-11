@@ -22,7 +22,7 @@ export const verifyToken = (req, res, next) => {
         }
 
         // Refresh token is valid. Issue a new access token.
-        const newAccessToken = jwt.sign({ id: user._id }, process.env.JWT, {
+        const newAccessToken = jwt.sign({ id: user.id }, process.env.JWT, {
           expiresIn: '1m',
         })
 
