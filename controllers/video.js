@@ -140,6 +140,7 @@ export const trend = async (req, res, next) => {
 // Get video list of subscriptions
 export const sub = async (req, res, next) => {
   console.log('Handling /sub route')
+  console.log('Subscription videos USER: ', req.user)
   const skip = req.query.skip ? Number(req.query.skip) : 0
   const limit = req.query.limit ? Number(req.query.limit) : 10
   try {

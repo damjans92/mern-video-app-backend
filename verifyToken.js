@@ -51,6 +51,7 @@ export const verifyToken = (req, res, next) => {
 
       // Access token is valid. Continue processing the request.
       req.user = user
+      console.log('server USER:', req.user)
       next()
     })
   }
