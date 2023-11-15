@@ -88,14 +88,33 @@ export const googleAuth = async (req, res, next) => {
     const user = await User.findOne({ email: req.body.email })
     if (user) {
       console.log('ima usera')
-      const token = jwt.sign({ id: user._id }, process.env.JWT)
-      if (token) console.log('token je ' + token)
-      res
-        .cookie('access_token', token, {
-          httpOnly: true,
-        })
-        .status(200)
-        .json(user._doc)
+      const accessToken = jwt.sign({ id: user._id }, process.env.JWT, {
+        expiresIn: '1m',
+      })
+
+      const refreshToken = jwt.sign({ id: user._id }, process.env.JWT, {
+        expiresIn: '7d',
+      })
+
+      // Set the access token as an HTTP-only cookie
+      res.cookie('access_token', accessToken, {
+        httpOnly: true,
+        sameSite: 'none',
+        secure: true,
+        maxAge: 1 * 60 * 1000,
+        domain: 'drab-plum-buffalo-ring.cyclic.app',
+      })
+
+      // Set the refresh token as an HTTP-only cookie
+      res.cookie('refresh_token', refreshToken, {
+        httpOnly: true,
+        sameSite: 'none',
+        secure: true,
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+        domain: 'drab-plum-buffalo-ring.cyclic.app',
+      })
+
+      res.status(200).json(user._doc)
     } else {
       const newUser = new User({
         ...req.body,
