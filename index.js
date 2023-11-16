@@ -14,7 +14,7 @@ app.use(cookieParser())
 app.use(
   cors({
     credentials: true,
-    origin: 'https://tubeland.onrender.com',
+    origin: ['https://tubeland.onrender.com', 'http://localhost:5173'],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
     allowedHeaders:
       'Origin, X-Requested-With, Content-Type, Authorization, Accept',
