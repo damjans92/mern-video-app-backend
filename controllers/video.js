@@ -52,15 +52,11 @@ export const getUserVideos = async (req, res, next) => {
 
     res.status(200).json(videos)
   } catch (error) {
-    // Handle errors appropriately
-    console.error('Error in getUserVideos:', error)
-
     // Check if headers have already been sent
     if (res.headersSent) {
-      return next(error) // Pass the error to the next middleware or error handler
+      return next(error)
     }
 
-    // Send a response with an error status and message
     res.status(500).json({ error: 'Internal Server Error' })
   }
 }
@@ -139,8 +135,6 @@ export const trend = async (req, res, next) => {
 
 // Get video list of subscriptions
 export const sub = async (req, res, next) => {
-  console.log('Handling /sub route')
-  console.log('Subscription videos USER: ', req.user)
   const skip = req.query.skip ? Number(req.query.skip) : 0
   const limit = req.query.limit ? Number(req.query.limit) : 10
   try {
@@ -151,7 +145,6 @@ export const sub = async (req, res, next) => {
     }
 
     const subscribedChannels = user.subscribedUsers
-    console.log('SubCHANNELS: ' + subscribedChannels)
     if (subscribedChannels.length === 0) {
       return res.status(200).json([])
     }

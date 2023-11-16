@@ -1,4 +1,3 @@
-import mongoose from 'mongoose'
 import User from '../models/User.js'
 import bcrypt from 'bcryptjs'
 import { createError } from '../error.js'
@@ -12,7 +11,7 @@ export const signup = async (req, res, next) => {
     const newUser = new User({ ...req.body, password: hash })
 
     await newUser.save()
-    console.log(newUser)
+
     res.status(200).send('User has been created')
   } catch (err) {
     next(err)
@@ -49,7 +48,7 @@ export const signin = async (req, res, next) => {
     if (!isCorrect) return next(createError(404, 'Wrong credentials'))
 
     const accessToken = jwt.sign({ id: user._id }, process.env.JWT, {
-      expiresIn: '1m',
+      expiresIn: '1h',
     })
 
     const refreshToken = jwt.sign({ id: user._id }, process.env.JWT, {
@@ -63,7 +62,7 @@ export const signin = async (req, res, next) => {
       httpOnly: true,
       sameSite: 'none',
       secure: true,
-      maxAge: 1 * 60 * 1000,
+      maxAge: 1 * 60 * 60 * 1000,
       domain: 'drab-plum-buffalo-ring.cyclic.app',
     })
 
@@ -87,9 +86,8 @@ export const googleAuth = async (req, res, next) => {
   try {
     const user = await User.findOne({ email: req.body.email })
     if (user) {
-      console.log('ima usera')
       const accessToken = jwt.sign({ id: user._id }, process.env.JWT, {
-        expiresIn: '1m',
+        expiresIn: '1h',
       })
 
       const refreshToken = jwt.sign({ id: user._id }, process.env.JWT, {
@@ -101,7 +99,7 @@ export const googleAuth = async (req, res, next) => {
         httpOnly: true,
         sameSite: 'none',
         secure: true,
-        maxAge: 1 * 60 * 1000,
+        maxAge: 1 * 60 * 60 * 1000,
         domain: 'drab-plum-buffalo-ring.cyclic.app',
       })
 
@@ -135,7 +133,7 @@ export const googleAuth = async (req, res, next) => {
         httpOnly: true,
         sameSite: 'none',
         secure: true,
-        maxAge: 1 * 60 * 1000,
+        maxAge: 1 * 60 * 60 * 1000,
         domain: 'drab-plum-buffalo-ring.cyclic.app',
       })
 
@@ -149,15 +147,6 @@ export const googleAuth = async (req, res, next) => {
       })
 
       res.status(200).json(savedUser._doc)
-      // const token = jwt.sign({ id: savedUser._id }, process.env.JWT, {
-      //   expiresIn: '7d',
-      // })
-      // res
-      //   .cookie('access_token', token, {
-      //     httpOnly: true,
-      //   })
-      //   .status(200)
-      //   .json(savedUser._doc)
     }
   } catch (err) {
     console.error(err.message)
