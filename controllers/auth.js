@@ -63,7 +63,7 @@ export const signin = async (req, res, next) => {
       sameSite: 'none',
       secure: true,
       maxAge: 1 * 60 * 60 * 1000,
-      domain: 'https://tubeland-eu-api.onrender.com',
+      domain: 'tubeland-eu-api.onrender.com',
     })
 
     // Set the refresh token as an HTTP-only cookie
@@ -72,7 +72,7 @@ export const signin = async (req, res, next) => {
       sameSite: 'none',
       secure: true,
       maxAge: 7 * 24 * 60 * 60 * 1000,
-      domain: 'https://tubeland-eu-api.onrender.com',
+      domain: 'tubeland-eu-api.onrender.com',
     })
 
     res.status(200).json(others)
@@ -100,7 +100,7 @@ export const googleAuth = async (req, res, next) => {
         sameSite: 'none',
         secure: true,
         maxAge: 1 * 60 * 60 * 1000,
-        domain: 'https://tubeland-eu-api.onrender.com',
+        domain: 'tubeland-eu-api.onrender.com',
       })
 
       // Set the refresh token as an HTTP-only cookie
@@ -109,7 +109,7 @@ export const googleAuth = async (req, res, next) => {
         sameSite: 'none',
         secure: true,
         maxAge: 7 * 24 * 60 * 60 * 1000,
-        domain: 'https://tubeland-eu-api.onrender.com',
+        domain: 'tubeland-eu-api.onrender.com',
       })
 
       res.status(200).json(user._doc)
@@ -134,7 +134,7 @@ export const googleAuth = async (req, res, next) => {
         sameSite: 'none',
         secure: true,
         maxAge: 1 * 60 * 60 * 1000,
-        domain: 'https://tubeland-eu-api.onrender.com',
+        domain: 'tubeland-eu-api.onrender.com',
       })
 
       // Set the refresh token as an HTTP-only cookie
@@ -143,7 +143,7 @@ export const googleAuth = async (req, res, next) => {
         sameSite: 'none',
         secure: true,
         maxAge: 7 * 24 * 60 * 60 * 1000,
-        domain: 'https://tubeland-eu-api.onrender.com',
+        domain: 'tubeland-eu-api.onrender.com',
       })
 
       res.status(200).json(savedUser._doc)
@@ -162,13 +162,13 @@ export const logout = async (req, res, next) => {
         httpOnly: true,
         sameSite: 'none',
         secure: true,
-        domain: 'https://tubeland-eu-api.onrender.com',
+        domain: 'tubeland-eu-api.onrender.com',
       })
       .clearCookie('refresh_token', {
         httpOnly: true,
         sameSite: 'none',
         secure: true,
-        domain: 'https://tubeland-eu-api.onrender.com',
+        domain: 'tubeland-eu-api.onrender.com',
       })
       .status(200)
       .send('Cookie cleared')
