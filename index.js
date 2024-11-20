@@ -1,9 +1,8 @@
 import express from "express";
-import mongoose from "mongoose";
-import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 
+import connectDB from "./db.js";
 import userRoutes from "./routes/users.js";
 import videoRoutes from "./routes/videos.js";
 import commentRoutes from "./routes/comments.js";
@@ -25,24 +24,7 @@ app.use(
 
 app.use(express.json());
 
-dotenv.config();
-
-const connectDB = () => {
-  const dbName =
-    process.env.NODE_ENV === "production" ? "videoapp_production" : "test";
-  mongoose
-    .connect(process.env.MONGO_URI, {
-      dbName,
-    })
-    .then(() => {
-      console.log("Connected to DB");
-    })
-    .catch((err) => {
-      throw err;
-    });
-};
-
-// routes
+// Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/videos", videoRoutes);
@@ -77,7 +59,12 @@ setInterval(async () => {
   }
 }, SELF_PING_INTERVAL);
 
-app.listen(8800, () => {
-  connectDB();
-  console.log("Connected to server");
-});
+// Starting server and connection to database
+const startServer = async () => {
+  await connectDB();
+  const port = process.env.PORT || 8800;
+  app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+  });
+};
+startServer();
